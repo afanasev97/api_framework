@@ -1,4 +1,4 @@
-import { Logger, ILogObj }  from "tslog";
+import { Logger, ILogObj } from "tslog";
 import { ILogger } from "./logger.interface";
 import { injectable } from "inversify";
 import "reflect-metadata";
@@ -10,20 +10,20 @@ export class LoggerService implements ILogger {
 	constructor() {
 		this.logger = new Logger({
 			type: "pretty",
-			hideLogPositionForProduction: true
-		})
+			hideLogPositionForProduction: true,
+		});
 	}
 
-	log(...args: unknown[]) {
+	log(...args: unknown[]): void {
 		this.logger.info(...args);
 	}
 
-	error(...args: unknown[]) {
+	error(...args: unknown[]): void {
 		// send to sentry / rollbar
 		this.logger.error(...args);
 	}
 
-	warn(...args: unknown[]) {
+	warn(...args: unknown[]): void {
 		this.logger.warn(...args);
 	}
 }
