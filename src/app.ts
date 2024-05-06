@@ -8,6 +8,7 @@ import { IUserController } from "./users/users.controller.interface";
 import { json } from "body-parser";
 import "reflect-metadata";
 import { IUserService } from "./users/users.service.interface";
+import { IConfigService } from "./config/config.service.interface";
 
 @injectable()
 export class App {
@@ -20,6 +21,7 @@ export class App {
 		@inject(TYPES.IUserController) private userController: IUserController,
 		@inject(TYPES.IExeptionFilter) private exeptionFilter: IExeptionFilter,
 		@inject(TYPES.IUserService) private userService: IUserService,
+		@inject(TYPES.IConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 		this.port = 8000;
