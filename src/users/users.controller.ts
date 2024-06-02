@@ -5,7 +5,7 @@ import { TYPES } from "../types";
 import { ILogger } from "../logger/logger.interface";
 import { IUserController } from "./users.controller.interface";
 import { IConfigService } from "../config/config.service.interface";
-import { IUserService } from "./users.service.interface";
+import { IUsersService } from "./users.service.interface";
 import { BaseController } from "../common/base.controller";
 import "reflect-metadata";
 import { UserLoginDto } from "./dto/user-login.dto";
@@ -18,7 +18,7 @@ import { AuthGuard } from "../common/auth.guard";
 export class UserController extends BaseController implements IUserController {
 	constructor(
 		@inject(TYPES.ILogger) private loggerService: ILogger,
-		@inject(TYPES.IUserService) private userService: IUserService,
+		@inject(TYPES.IUsersService) private userService: IUsersService,
 		@inject(TYPES.IConfigService) private configService: IConfigService,
 	) {
 		super(loggerService);

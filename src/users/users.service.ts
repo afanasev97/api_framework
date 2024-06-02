@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { UserLoginDto } from "./dto/user-login.dto";
 import { UserRegisterDto } from "./dto/user-register.dto";
 import { User } from "./user.entity";
-import { IUserService } from "./users.service.interface";
+import { IUsersService } from "./users.service.interface";
 import "reflect-metadata";
 import { TYPES } from "../types";
 import { IConfigService } from "../config/config.service.interface";
@@ -10,7 +10,7 @@ import { IUsersRepository } from "./users.repository.interface";
 import { UserModel } from "@prisma/client";
 
 @injectable()
-export class UserService implements IUserService {
+export class UserService implements IUsersService {
 	constructor(
 		@inject(TYPES.IConfigService) private configService: IConfigService,
 		@inject(TYPES.IUsersRepository) private usersRepository: IUsersRepository,

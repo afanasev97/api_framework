@@ -7,7 +7,7 @@ import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import { IUserController } from "./users/users.controller.interface";
 import { json } from "body-parser";
 import "reflect-metadata";
-import { IUserService } from "./users/users.service.interface";
+import { IUsersService } from "./users/users.service.interface";
 import { IConfigService } from "./config/config.service.interface";
 import { PrismaService } from "./database/prisma.servise";
 import { AuthMiddleware } from "./common/auth.middleware";
@@ -22,7 +22,7 @@ export class App {
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.IUserController) private userController: IUserController,
 		@inject(TYPES.IExeptionFilter) private exeptionFilter: IExeptionFilter,
-		@inject(TYPES.IUserService) private userService: IUserService,
+		@inject(TYPES.IUsersService) private userService: IUsersService,
 		@inject(TYPES.IConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private prismaService: PrismaService,
 	) {
