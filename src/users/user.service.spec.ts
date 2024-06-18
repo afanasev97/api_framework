@@ -31,6 +31,8 @@ beforeAll(() => {
 	usersService = container.get<IUsersService>(TYPES.IUsersService);
 });
 
+let createdUser: UserModel | null;
+
 describe("User Service", () => {
 	it("createUser", async () => {
 		configService.get = jest.fn().mockReturnValueOnce("1");
@@ -42,12 +44,39 @@ describe("User Service", () => {
 				id: 1,
 			}),
 		);
-		const createdUser = await usersService.createUser({
+		createdUser = await usersService.createUser({
 			email: "a@a.com",
 			name: "a",
 			password: "1",
 		});
 		expect(createdUser?.id).toEqual(1);
 		expect(createdUser?.password).not.toEqual("1");
+	});
+
+	it("validateUser - succes", async () => {
+		usersRepository.find = jest.fn().mockReturnValueOnce(createdUser);
+		const res = await usersService.validateUser({
+			email: "a@a.com",
+			password: "1",
+		});
+		expect(res).toBeTruthy();
+	});
+
+	it("validateUser - wrong pass", async () => {
+		usersRepository.find = jest.fn().mockReturnValueOnce(createdUser);
+		const res = await usersService.validateUser({
+			email: "a@a.com",
+			password: "2",
+		});
+		expect(res).toBeFalsy();
+	});
+
+	it("validateUser - wrong user", async () => {
+		usersRepository.find = jest.fn().mockReturnValueOnce(null);
+		const res = await usersService.validateUser({
+			email: "a1@a.com",
+			password: "1",
+		});
+		expect(res).toBeFalsy();
 	});
 });
